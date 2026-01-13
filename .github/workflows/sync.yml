@@ -1,0 +1,23 @@
+name: Sync Upstream
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'   # 每个月 1 号 00:00 自动同步
+  workflow_dispatch:       # 支持手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream
+        run: |
+          git remote add upstream https://github.com/VIKINGYFY/OpenWRT-CI.git
+          git fetch upstream
+          git merge upstream/main --allow-unrelated-histories -m "Sync upstream"
+          git push
