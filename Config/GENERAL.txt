@@ -1,3 +1,5 @@
+#恢复ipk安装包
+CONFIG_USE_APK=n
 #科学插件调整
 CONFIG_PACKAGE_luci-app-homeproxy=y
 #增加插件
